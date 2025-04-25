@@ -1,24 +1,33 @@
-"use client"
-import { useState } from "react"
+// app/register/page.js
+"use client";
+import { useState } from "react";
 
 export default function Register() {
-  const [form, setForm] = useState({ name: "", email: "", password: "" })
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const res = await fetch("/api/register", {
+    const res = await fetch("/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
-    })
+    });
 
-    const data = await res.json()
-    alert(data.message)
-  }
+    const data = await res.json();
+
+    if (res.ok) {
+      alert(data.message);
+      setForm({ name: "", email: "", password: "" }); // Limpar o formulário
+    } else {
+      setError(data.message); // Exibir mensagem de erro
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-10 space-y-4">
+      {error && <p className="text-red-500">{error}</p>}
       <input
         type="text"
         placeholder="Nome completo"
@@ -40,9 +49,9 @@ export default function Register() {
         className="w-full p-2 border rounded"
         required
       />
-      <button type="submit" className="w-full bg-yellow-500 text-white p-2 rounded">Criar Conta</button>
+      <button type="submit" className="w-full bg-yellow-500 text-white p-2 rounded">
+        Criar Conta
+      </button>
     </form>
-  )
+  );
 }
-
-  

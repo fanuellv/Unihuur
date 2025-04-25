@@ -18,7 +18,7 @@ export default function Home() {
     <div className="font-[family-name:var(--font-geist-sans)]">
       <header className="flex top-0 left-0 w-full h-[100px] items-center bg-white justify-between p-2 pb-10 gap-2 sm:p-12 fixed z-90 shadow">
         <Image
-          className="dark:invert"
+          className=""
           src="/img/logoUnihuur.svg"
           alt="logo"
           width={180}

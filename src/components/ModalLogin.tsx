@@ -1,24 +1,57 @@
 "use client";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type ModalLoginProps = {
   isOpen: boolean;
   onClose: () => void;
-  children?: React.ReactNode; // Adicionando a propriedade children
-}
-
+};
 
 export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
+
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
-
     window.addEventListener("keydown", handleEsc);
-
     return () => window.removeEventListener("keydown", handleEsc);
   }, [onClose]);
+
+  const handleLogin = async () => {
+    setError(""); // Limpar qualquer erro anterior
+
+    try {
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Erro ao entrar");
+        return;
+      }
+
+      // Armazenar o token JWT no localStorage
+      localStorage.setItem("token", data.token);
+
+      // Fechar o modal
+      onClose();
+
+      // Redirecionar para o dashboard ou página protegida usando o Next.js router
+      router.push("/dashboard"); // Recomenda-se usar o router.push ao invés de window.location.href
+
+    } catch (err) {
+      setError("Erro de rede ou servidor. Tente novamente.");
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -32,7 +65,6 @@ export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
 
       {/* Caixa do modal */}
       <div className="relative z-100 bg-white rounded-3xl shadow-xl w-full max-w-md px-10 py-12 space-y-6">
-        {/* Botão de fechar */}
         <button
           onClick={onClose}
           className="absolute top-4 right-5 text-gray-400 text-2xl hover:text-gray-700 transition"
@@ -40,21 +72,28 @@ export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
           &times;
         </button>
 
-        {/* Conteúdo do Modal (pode ser um formulário de login, uma mensagem de erro, etc.) */}
         <div className="flex flex-col gap-6">
           <h2 className="text-2xl font-bold text-center text-gray-800">
             Bem-vindo de volta!
           </h2>
 
+          {error && (
+            <p className="text-red-500 text-sm text-center">{error}</p>
+          )}
+
           <input
             type="email"
             placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="border border-gray-200 rounded-xl p-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
           />
 
           <input
             type="password"
             placeholder="Senha"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="border border-gray-200 rounded-xl p-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
           />
 
@@ -65,24 +104,21 @@ export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
           </div>
 
           <div className="w-full flex justify-around items-center gap-4">
-            
-            <Link href="/build" className="w-[45%]">
             <button
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl text-lg font-semibold transition shadow"
-              onClick={onClose} // Simula o login ou outra ação
+              className="w-[45%] bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl text-lg font-semibold transition shadow"
+              onClick={handleLogin}
             >
               Entrar
             </button>
-            </Link>
+
             <Link href="/Create" className="w-[45%]">
-            <button
-              className="w-full border border-orange-500 text-orange-500 hover:bg-orange-50 py-3 rounded-xl text-lg font-semibold transition shadow-sm"
-              onClick={onClose} // Criar uma nova conta ou outro comportamento
-            >
-              Criar Conta
-            </button>
+              <button
+                className="w-full border border-orange-500 text-orange-500 hover:bg-orange-50 py-3 rounded-xl text-lg font-semibold transition shadow-sm"
+                onClick={onClose}
+              >
+                Criar Conta
+              </button>
             </Link>
-            
           </div>
         </div>
       </div>
