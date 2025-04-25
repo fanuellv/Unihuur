@@ -28,7 +28,7 @@ export async function POST(request) {
       password: hashedPassword,
     },
   });
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  
   return NextResponse.json({ message: 'Usuário criado com sucesso!' ,
     user: { id: newUser.id, email: newUser.email }
   });
