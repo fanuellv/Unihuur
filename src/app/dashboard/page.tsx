@@ -15,7 +15,7 @@ import Conta from "../../components/Conta";
 
 export default function Dashboard() {
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(null); // Alterado para null inicialmente
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [activeSection, setActiveSection] = useState("explorar");
   const [showProfileOptions, setShowProfileOptions] = useState(false);
 
