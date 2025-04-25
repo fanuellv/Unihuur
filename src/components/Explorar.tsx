@@ -7,12 +7,12 @@ export default function Explorar() {
   const [searchQuery, setSearchQuery] = useState("");
 
   // Função para lidar com a mudança no campo de pesquisa
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 
   // Função que pode ser chamada ao submeter a pesquisa
-  const handleSearchSubmit = (e) => {
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Pesquisar:", searchQuery); // Aqui você pode adicionar a lógica de pesquisa
   };
@@ -25,7 +25,7 @@ export default function Explorar() {
       {/* Barra de Pesquisa */}
       <div className="w-full px-4 mt-10">
         <form
-          onSubmit={handleSearchSubmit}
+          onSubmit={handleSearchSubmit} // Aqui, o tipo correto é React.FormEvent<HTMLFormElement>
           className="flex w-full h-40 items-top gap-2 border border-gray-300 rounded-lg p-2"
         >
           {/* Campo de entrada com ícone */}
@@ -50,7 +50,7 @@ export default function Explorar() {
             <input
               type="text"
               value={searchQuery}
-              onChange={handleSearchChange}
+              onChange={handleSearchChange} // Tipo de evento: React.ChangeEvent<HTMLInputElement>
               placeholder="Buscar..."
               className="flex-1 bg-transparent py-2 outline-none align-text-top placeholder:align-top"
             />
