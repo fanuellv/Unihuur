@@ -148,7 +148,10 @@ export default function Home() {
         </footer>
       </main>
 
-      <ModalLogin isOpen={showModal} onClose={() => setShowModal(false)} />
+      <ModalLogin isOpen={showModal} onClose={() => setShowModal(false)}>
+  {/* Qualquer conteúdo que você queira passar como children */}
+</ModalLogin>
+
     </div>
   );
 }

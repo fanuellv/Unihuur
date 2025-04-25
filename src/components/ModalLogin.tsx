@@ -4,7 +4,9 @@ import { useEffect } from "react";
 type ModalLoginProps = {
   isOpen: boolean;
   onClose: () => void;
+  children?: React.ReactNode; // Adicionando a propriedade children
 }
+
 
 export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
   useEffect(() => {
