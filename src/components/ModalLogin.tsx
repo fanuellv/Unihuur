@@ -49,10 +49,10 @@ export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
       router.push("/dashboard"); // Recomenda-se usar o router.push ao invés de window.location.href
 
     } 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    catch (err:unknown) {
+    
+    catch (_err:unknown) {
       setError("Erro de rede ou servidor. Tente novamente.");
-      console.error('Erro no login:', err);
+      console.error('Erro no login:', _err);
     }
   };
 
