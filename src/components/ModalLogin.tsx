@@ -1,27 +1,18 @@
 "use client";
 import Link from "next/link";
 import { useEffect } from "react";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
-ModalLogin.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  children: PropTypes.node,
-};
 
-/**
- * @typedef {Object} ModalLoginProps
- * @property {boolean} isOpen
- * @property {() => void} onClose
- * @property {React.ReactNode=} children
- */
 
-/**
- * @param {ModalLoginProps} props
- */
-export default function ModalLogin({ isOpen, onClose,children }) {
+type ModalLoginProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  children?: React.ReactNode; // <- aqui está o problema
+}
+export default function ModalLogin({ isOpen, onClose,children }: ModalLoginProps) {
   useEffect(() => {
-    const handleEsc = (e) => {
+    const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handleEsc);

@@ -8,6 +8,7 @@ const Hero = "/img/hero.svg";
 const Hero2 = "/img/divHero.svg";
 const footer = "/img/footer.svg";
 
+
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
 
