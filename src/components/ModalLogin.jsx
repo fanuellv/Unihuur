@@ -1,8 +1,16 @@
 "use client";
 import Link from "next/link";
 import { useEffect } from "react";
+import PropTypes from "prop-types";
 
-export default function ModalLogin({ isOpen, onClose }) {
+ModalLogin.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.node,
+};
+
+
+export default function ModalLogin({ isOpen, onClose,children }) {
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape") onClose();
