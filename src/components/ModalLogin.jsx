@@ -9,7 +9,16 @@ ModalLogin.propTypes = {
   children: PropTypes.node,
 };
 
+/**
+ * @typedef {Object} ModalLoginProps
+ * @property {boolean} isOpen
+ * @property {() => void} onClose
+ * @property {React.ReactNode=} children
+ */
 
+/**
+ * @param {ModalLoginProps} props
+ */
 export default function ModalLogin({ isOpen, onClose,children }) {
   useEffect(() => {
     const handleEsc = (e) => {
