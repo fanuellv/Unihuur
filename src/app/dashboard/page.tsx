@@ -13,41 +13,36 @@ import Adicionar from "../../components/Adicionar";
 import Alugueis from "../../components/Alugueis";
 import Conta from "../../components/Conta";
 
-// Tipando as seções possíveis
-type Section = "explorar" | "categoria" | "adicionar" | "alugueis" | "conta";
-
 export default function Dashboard() {
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false); // Agora é boolean ao invés de null
-  const [activeSection, setActiveSection] = useState<Section>("explorar");
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [activeSection, setActiveSection] = useState("explorar");
   const [showProfileOptions, setShowProfileOptions] = useState(false);
 
   // Verifica o token após o componente ser montado
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const token = localStorage.getItem("token");
-      setIsAuthenticated(!!token); // Define como true ou false
+    const token = localStorage.getItem("token");
+  
+    if (token) {
+      setIsAuthenticated(true); // Autenticado
+    } else {
+      setIsAuthenticated(false); // Não autenticado
     }
   }, []);
 
   // Redireciona apenas quando soubermos que o usuário não está autenticado
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (isAuthenticated === false) {
       router.push("/");
     }
   }, [isAuthenticated, router]);
 
   // Se ainda estiver verificando a autenticação, renderiza nada ou um loader
-  if (isAuthenticated === false) {
-    return <div>Loading...</div>;
+  if (isAuthenticated === null) {
+    return <div>Loading...</div>; // Você pode adicionar um spinner ou algo do tipo
   }
 
-  // Função para renderizar cada item do menu
-  const renderMenuItem = (
-    label: string,
-    Icon: React.ElementType,
-    sectionKey: Section
-  ) => {
+  const renderMenuItem = (label: string, Icon:React.ComponentType<React.SVGProps<SVGSVGElement>>, sectionKey: string) => {
     const isActive = activeSection === sectionKey;
 
     return (
