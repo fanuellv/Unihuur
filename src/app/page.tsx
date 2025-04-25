@@ -142,6 +142,7 @@ export default function Home() {
       {/* Modal de login */}
       <ModalLogin isOpen={showModal} onClose={() => setShowModal(false)}>
         {/* Conteúdo do modal, se houver */}
+        <div>.</div>
       </ModalLogin>
     </div>
   );
