@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useEffect } from "react";
 
 type ModalLoginProps = {
@@ -64,18 +65,24 @@ export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
           </div>
 
           <div className="w-full flex justify-around items-center gap-4">
+            
+            <Link href="/build" className="w-[45%]">
             <button
-              className="w-[45%] bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl text-lg font-semibold transition shadow"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl text-lg font-semibold transition shadow"
               onClick={onClose} // Simula o login ou outra ação
             >
               Entrar
             </button>
+            </Link>
+            <Link href="/Create" className="w-[45%]">
             <button
-              className="w-[45%] border border-orange-500 text-orange-500 hover:bg-orange-50 py-3 rounded-xl text-lg font-semibold transition shadow-sm"
+              className="w-full border border-orange-500 text-orange-500 hover:bg-orange-50 py-3 rounded-xl text-lg font-semibold transition shadow-sm"
               onClick={onClose} // Criar uma nova conta ou outro comportamento
             >
               Criar Conta
             </button>
+            </Link>
+            
           </div>
         </div>
       </div>

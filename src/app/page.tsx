@@ -4,6 +4,9 @@ import { useState } from "react";
 import Botao from "../components/botao";
 import ModalLogin from "../components/ModalLogin";
 
+
+
+
 const Hero = "/img/hero.svg";
 const Hero2 = "/img/divHero.svg";
 const footer = "/img/footer.svg";
@@ -47,6 +50,7 @@ export default function Home() {
           <h1 className="text-[2.5rem] font-bold text-white w-[44%] text-center">
             Plataforma de Aluguel e Partilha de Materiais Acadêmicos
           </h1>
+          
           <Botao
             texto={"Junte-se a Comunidade"}
             corB="#ffff"
@@ -55,6 +59,7 @@ export default function Home() {
             tamanhoFonte="1.2rem"
             onClick={() => setShowModal(true)}
           />
+      
         </section>
 
         <section
