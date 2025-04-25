@@ -50,9 +50,9 @@ export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
 
     } 
     
-    catch (_err:unknown) {
+    catch {
       setError("Erro de rede ou servidor. Tente novamente.");
-      console.error('Erro no login:', _err);
+      console.error("Erro no login");
     }
   };
 
