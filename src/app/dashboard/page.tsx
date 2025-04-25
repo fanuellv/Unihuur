@@ -18,7 +18,7 @@ type Section = "explorar" | "categoria" | "adicionar" | "alugueis" | "conta";
 
 export default function Dashboard() {
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState<null | boolean>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false); // Agora é boolean ao invés de null
   const [activeSection, setActiveSection] = useState<Section>("explorar");
   const [showProfileOptions, setShowProfileOptions] = useState(false);
 
@@ -26,19 +26,19 @@ export default function Dashboard() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("token");
-      setIsAuthenticated(!!token);
+      setIsAuthenticated(!!token); // Define como true ou false
     }
   }, []);
 
   // Redireciona apenas quando soubermos que o usuário não está autenticado
   useEffect(() => {
-    if (isAuthenticated === false) {
+    if (!isAuthenticated) {
       router.push("/");
     }
   }, [isAuthenticated, router]);
 
   // Se ainda estiver verificando a autenticação, renderiza nada ou um loader
-  if (isAuthenticated === null) {
+  if (isAuthenticated === false) {
     return <div>Loading...</div>;
   }
 
