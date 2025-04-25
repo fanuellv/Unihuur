@@ -29,5 +29,7 @@ export async function POST(request) {
     },
   });
 
-  return NextResponse.json({ message: 'Usuário criado com sucesso!' });
+  return NextResponse.json({ message: 'Usuário criado com sucesso!' ,
+    user: { id: newUser.id, email: newUser.email }
+  });
 }
