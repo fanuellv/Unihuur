@@ -48,7 +48,7 @@ export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
       // Redirecionar para o dashboard ou página protegida usando o Next.js router
       router.push("/dashboard"); // Recomenda-se usar o router.push ao invés de window.location.href
 
-    } catch (err) {
+    } catch (err:unknown) {
       setError("Erro de rede ou servidor. Tente novamente.");
       console.error('Erro no login:', err);
     }
