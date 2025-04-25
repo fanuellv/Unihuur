@@ -2,9 +2,7 @@
 import Link from "next/link";
 import { useEffect } from "react";
 
-
-
-export default function ModalLogin({ isOpen, onClose, children }) {
+export default function ModalLogin({ isOpen, onClose }) {
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape") onClose();
@@ -72,11 +70,9 @@ export default function ModalLogin({ isOpen, onClose, children }) {
                 className="w-[45%]"
               >
                 <button className="w-full border border-orange-500 text-orange-500 hover:bg-orange-50 py-3 rounded-xl text-lg font-semibold transition shadow-sm">
-                Criar Conta
-              </button>
+                  Criar Conta
+                </button>
               </Link>
-
-              
             </div>
           </div>
         )}
