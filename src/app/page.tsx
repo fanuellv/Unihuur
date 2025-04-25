@@ -8,7 +8,6 @@ const Hero = "/img/hero.svg";
 const Hero2 = "/img/divHero.svg";
 const footer = "/img/footer.svg";
 
-
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
 
@@ -97,9 +96,15 @@ export default function Home() {
             <div className="w-[20%] max-w-[200px] flex flex-col items-center">
               <h1 className="font-bold mb-4">Links Úteis</h1>
               <ul className="space-y-2 flex flex-col justify-center items-center">
-                <li><a href="#">Sobre nós</a></li>
-                <li><a href="#">Como Funciona</a></li>
-                <li><a href="#">Planos e preços</a></li>
+                <li>
+                  <a href="#">Sobre nós</a>
+                </li>
+                <li>
+                  <a href="#">Como Funciona</a>
+                </li>
+                <li>
+                  <a href="#">Planos e preços</a>
+                </li>
               </ul>
             </div>
 
@@ -123,8 +128,12 @@ export default function Home() {
             <div className="w-[20%] max-w-[200px] flex flex-col items-center">
               <h1 className="font-bold mb-4">Contacto</h1>
               <ul className="space-y-2 mb-4 flex flex-col justify-center items-center">
-                <li><a href="#">email: unihuur@gmail.com</a></li>
-                <li><a href="#">Localização: Luanda</a></li>
+                <li>
+                  <a href="#">email: unihuur@gmail.com</a>
+                </li>
+                <li>
+                  <a href="#">Localização: Luanda</a>
+                </li>
               </ul>
               <Image
                 src="/img/socialmedia.svg"
@@ -139,11 +148,7 @@ export default function Home() {
         </footer>
       </main>
 
-      {/* Modal de login */}
-      <ModalLogin isOpen={showModal} onClose={() => setShowModal(false)}>
-        {/* Conteúdo do modal, se houver */}
-        <div>.</div>
-      </ModalLogin>
+      <ModalLogin isOpen={showModal} onClose={() => setShowModal(false)} />
     </div>
   );
 }
