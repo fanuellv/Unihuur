@@ -25,3 +25,8 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+  
+  if (process.env.SKIP_SEED === 'true') {
+    console.log('Skipping seed script...');
+    process.exit(0);
+  }
