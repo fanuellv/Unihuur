@@ -1,12 +1,12 @@
-import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcryptjs';
+const { PrismaClient } = require('@prisma/client');
+const bcrypt = require('bcryptjs');
 
 const prisma = new PrismaClient();
 
 async function main() {
   const password = await bcrypt.hash('12345678', 10); // senha encriptada
 
-  const user = await prisma.user.create({
+  const user = await prisma.User.create({
     data: {
       name: 'Fanuel',
       email: 'fanuell@example.com',
@@ -14,7 +14,7 @@ async function main() {
     },
   });
 
-  console.log('User criado:', user);
+  console.log('User criado:', User);
 }
 
 main()
