@@ -14,7 +14,7 @@ async function main() {
     },
   });
 
-  console.log('User criado:', User);
+  console.log('User criado:', user);
 }
 
 main()
