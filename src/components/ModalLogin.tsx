@@ -59,7 +59,7 @@ export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed p-10 sm:p-10 inset-0 z-50 flex items-center justify-center">
       {/* Fundo escurecido com blur */}
       <div
         className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
@@ -89,7 +89,7 @@ export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="border border-gray-200 rounded-xl p-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
+            className="border text-black border-gray-200 rounded-xl p-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
           />
 
           <input
@@ -97,7 +97,7 @@ export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
             placeholder="Senha"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="border border-gray-200 rounded-xl p-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
+            className="border text-black border-gray-200 rounded-xl p-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
           />
 
           <div className="text-center">

@@ -18,18 +18,18 @@ export default function Explorar() {
   };
 
   return (
-    <div className="space-y-2 m-20">
-      <h1 className="text-5xl font-bold mt-10">Bem-vindo de Volta!</h1>
-      <p className="mt-5">Encontre, alugue e compartilhe materiais acadêmicos!</p>
+    <div className="relative top-10 space-y-2 m-5">
+      <h1 className="text-2xl sm:text-5xl font-bold text-black">Bem-vindo de Volta!</h1>
+      <p className="mt-5 text-black">Encontre, alugue e compartilhe materiais acadêmicos!</p>
 
       {/* Barra de Pesquisa */}
-      <div className="w-full px-4 mt-10">
+      <div className="w-full px-4 mt-10 overflow-hidden">
         <form
           onSubmit={handleSearchSubmit} // Aqui, o tipo correto é React.FormEvent<HTMLFormElement>
-          className="flex w-full h-40 items-top gap-2 border border-gray-300 rounded-lg p-2"
+          className="flex w-full h-20 sm:h-40 items-top gap-2 border border-gray-300 rounded-lg p-2"
         >
           {/* Campo de entrada com ícone */}
-          <div className="flex h-35 items-top w-full border-1 border-amber-600 rounded-lg p-5">
+          <div className="flex  sm:h-35 items-top w-full border-1 border-amber-600 rounded-lg p-5">
             {/* Ícone de pesquisa */}
             <svg
               className="w-5 h-5 text-gray-500 mr-2"
@@ -65,13 +65,13 @@ export default function Explorar() {
           </button>
         </form>
       </div>
-      <div className="flex w-full items-center justify-center gap-5 mt-10">
+      <div className=" sm:flex sm:w-full items-center justify-center gap-5 mt-10">
         <Image
           src="/img/aluna.svg"
           alt="redes sociais"
           width={250}
           height={250}
-          className="object-contain"
+          className="object-contain w-40 sm:w-50"
           priority
         />
         <Image
@@ -79,7 +79,7 @@ export default function Explorar() {
           alt="redes sociais"
           width={400}
           height={400}
-          className="object-contain"
+          className="object-contain w-50 relative left-35 sm:w-50"
           priority
         />
       </div>

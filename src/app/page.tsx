@@ -4,9 +4,6 @@ import { useState } from "react";
 import Botao from "../components/botao";
 import ModalLogin from "../components/ModalLogin";
 
-
-
-
 const Hero = "/img/hero.svg";
 const Hero2 = "/img/divHero.svg";
 const footer = "/img/footer.svg";
@@ -15,42 +12,40 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="font-[family-name:var(--font-geist-sans)]">
-      <header className="flex top-0 left-0 w-full h-[100px] items-center bg-white justify-between p-2 pb-10 gap-2 sm:p-12 fixed z-90 shadow">
+    <div className="font-[family-name:var(--font-geist-sans)]  bg-white ">
+      <header className="flex w-full h-[100px] items-center bg-white justify-around p-2 gap-2 fixed z-90 shadow">
         <Image
-          className=""
           src="/img/logoUnihuur.svg"
           alt="logo"
           width={180}
           height={38}
           priority
         />
-        <div className="w-[25rem] flex justify-between items-center">
-          <a href="#">Quem Somos</a>
-          <a href="#">Como usar?</a>
+        <div className="w-[25rem] flex justify-around items-center">
+          <a href="#" className="hidden md:block">
+            Quem Somos
+          </a>
+          <a href="#" className="hidden md:block">
+            Como usar?
+          </a>
           <Botao texto={"Iniciar sessão"} onClick={() => setShowModal(true)} />
         </div>
       </header>
 
       <main className="pt-[100px] relative flex flex-col">
         <section
-          className="flex justify-center items-center flex-col"
+          className="w-screen h-[60vh] sm:h-[75vh] flex justify-center items-center flex-col bg-cover bg-center bg-no-repeat"
           style={{
-            width: "100vw",
-            height: "75vh",
             backgroundImage: `linear-gradient(
-              rgba(0, 0, 0, 0.2),
-              rgba(0, 0, 0, 0.4)
-            ),url(${Hero})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.4)
+    ), url(${Hero})`,
           }}
         >
-          <h1 className="text-[2.5rem] font-bold text-white w-[44%] text-center">
+          <h1 className="text-[1.8rem] sm:text-[3rem] font-bold text-white w-[50%]  sm:w-[44%] text-center mb-2">
             Plataforma de Aluguel e Partilha de Materiais Acadêmicos
           </h1>
-          
+
           <Botao
             texto={"Junte-se a Comunidade"}
             corB="#ffff"
@@ -59,23 +54,17 @@ export default function Home() {
             tamanhoFonte="1.2rem"
             onClick={() => setShowModal(true)}
           />
-      
         </section>
 
         <section
-          className="relative top-0 p-0"
+          className=" hidden sm:block relative top-0 p-0 w-screen h-50 sm:h-[10rem] bg-cover bg-center bg-no-repeat"
           style={{
-            width: "100vw",
-            height: "150px",
             backgroundImage: `url(${Hero2})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
           }}
         ></section>
 
-        <section className="flex flex-row justify-center items-center pt-30 pb-30 gap-10">
-          <div className="relative w-[481px] h-[450px]">
+        <section className="flex flex-col sm:flex-row items-center justify-center pt-16 pb-16 gap-10">
+          <div className="relative w-[90%] sm:w-1/2 flex justify-center">
             <Image
               src="/img/aluna.svg"
               alt="Divisor visual"
@@ -85,8 +74,9 @@ export default function Home() {
               priority
             />
           </div>
-          <div className="w-[450px] h-[200px]">
-            <h1 className="text-4xl font-bold">
+
+          <div className="w-[60%]  text-center sm:w-1/2 flex items-center justify-center sm:text-left">
+            <h1 className="text-xl text-black font-bold sm:text-4xl">
               Junte-se ao Unihuur! Comece a compartilhar e alugar livros com
               outros estudantes.
             </h1>
@@ -94,13 +84,13 @@ export default function Home() {
         </section>
 
         <footer
-          className="w-full h-[487px] bg-cover bg-center bg-no-repeat text-white "
+          className="w-full sm:h-100 bg-cover bg-center bg-no-repeat text-white"
           style={{ backgroundImage: `url(${footer})` }}
         >
-          <div className="max-w-screen-xl mx-auto flex flex-row justify-center items-center h-full py-10 px-8">
-            <div className="w-[20%] max-w-[200px] flex flex-col items-center">
+          <div className="w-full flex flex-col sm:flex-row justify-center items-center h-full py-10 px-8 gap-4">
+            <div className="w-full sm:w-[20%] max-w-[200px] flex flex-col items-center text-center">
               <h1 className="font-bold mb-4">Links Úteis</h1>
-              <ul className="space-y-2 flex flex-col justify-center items-center">
+              <ul className="space-y-2">
                 <li>
                   <a href="#">Sobre nós</a>
                 </li>
@@ -113,16 +103,16 @@ export default function Home() {
               </ul>
             </div>
 
-            <div className="w-[55%] text-center px-6 ">
+            <div className="w-full sm:w-[55%] flex flex-col items-center text-center px-6">
               <h1 className="font-bold text-4xl mb-4">UNIHUUR</h1>
-              <p className="mb-6 mx-auto max-w-[80%]">
+              <p className="mb-6 mx-auto max-w-[50%]">
                 O Unihuur é a plataforma inovadora que facilita o acesso a
                 materiais acadêmicos através de aluguel e partilha entre
                 estudantes universitários.
               </p>
               <Botao
                 texto={"Entrar"}
-                corB="#ffff"
+                corB="#ffffff"
                 corTexto="#F0862B"
                 largura="200px"
                 tamanhoFonte="1rem"
@@ -130,9 +120,9 @@ export default function Home() {
               />
             </div>
 
-            <div className="w-[20%] max-w-[200px] flex flex-col items-center">
+            <div className="w-full sm:w-[20%] max-w-[200px] flex flex-col items-center text-center">
               <h1 className="font-bold mb-4">Contacto</h1>
-              <ul className="space-y-2 mb-4 flex flex-col justify-center items-center">
+              <ul className="space-y-2 mb-4">
                 <li>
                   <a href="#">email: unihuur@gmail.com</a>
                 </li>
@@ -154,9 +144,8 @@ export default function Home() {
       </main>
 
       <ModalLogin isOpen={showModal} onClose={() => setShowModal(false)}>
-  {/* Qualquer conteúdo que você queira passar como children */}
-</ModalLogin>
-
+        {/* Qualquer conteúdo que você queira passar como children */}
+      </ModalLogin>
     </div>
   );
 }

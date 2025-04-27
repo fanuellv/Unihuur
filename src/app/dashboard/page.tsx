@@ -22,7 +22,7 @@ export default function Dashboard() {
   // Verifica o token após o componente ser montado
   useEffect(() => {
     const token = localStorage.getItem("token");
-  
+
     if (token) {
       setIsAuthenticated(true); // Autenticado
     } else {
@@ -42,13 +42,17 @@ export default function Dashboard() {
     return <div>Loading...</div>; // Você pode adicionar um spinner ou algo do tipo
   }
 
-  const renderMenuItem = (label: string, Icon:React.ComponentType<React.SVGProps<SVGSVGElement>>, sectionKey: string) => {
+  const renderMenuItem = (
+    label: string,
+    Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>,
+    sectionKey: string
+  ) => {
     const isActive = activeSection === sectionKey;
 
     return (
       <div
         onClick={() => setActiveSection(sectionKey)}
-        className={`relative flex items-center gap-3 pl-5 pr-3 py-2 rounded-lg cursor-pointer hover:bg-gray-700 ${
+        className={`relative hidden sm:flex items-center gap-3 pl-5 pr-3 py-2 rounded-lg cursor-pointer hover:bg-gray-700 ${
           isActive ? "bg-gray-700" : ""
         }`}
       >
@@ -66,6 +70,36 @@ export default function Dashboard() {
       </div>
     );
   };
+  const renderMenuItemMobile = (
+    label: string,
+    Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>,
+    sectionKey: string
+  ) => {
+    const isActive = activeSection === sectionKey;
+
+    return (
+      <div
+        onClick={() => setActiveSection(sectionKey)}
+        className={`relative flex flex-col sm:hidden items-center sm:items-center gap-1 sm:gap-3 pl-2 sm:pl-5 pr-2 sm:pr-3 py-2 rounded-lg cursor-pointer hover:bg-gray-700 ${
+          isActive ? "bg-gray-700" : ""
+        }`}
+      >
+        {isActive && (
+          <div className="absolute left-0 sm:left-0 top-0 sm:top-0 h-1 sm:h-full w-full sm:w-2 bg-orange-500 rounded-t sm:rounded-r" />
+        )}
+        <Icon
+          className={`${isActive ? "text-orange-500" : "text-white"} text-xl`}
+        />
+        <span
+          className={`uppercase text-[0.7rem] sm:text-base ${
+            isActive ? "text-orange-500 font-medium" : "text-white"
+          }`}
+        >
+          {label}
+        </span>
+      </div>
+    );
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -74,30 +108,33 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="w-full flex justify-center items-center h-screen overflow-hidden">
-      <div className="w-full flex space-x-4">
-        <div className="w-1/4 h-screen p-4 bg-[#1A243F] shadow-lg">
-          <Image
-            className="pb-10"
-            src="/img/logoOrange.svg"
-            alt="logo"
-            width={180}
-            height={38}
-            priority
-          />
-
-          <div className="space-y-2 text-white">
-            {renderMenuItem("Explorar", FaWpexplorer, "explorar")}
-            {renderMenuItem("Categoria", TbCategoryFilled, "categoria")}
-            {renderMenuItem("Adicionar Material", FaPlusCircle, "adicionar")}
-            {renderMenuItem("Meus Alugueis", HiRectangleStack, "alugueis")}
-            {renderMenuItem("Conta Unihuur", MdAccountBalance, "conta")}
-          </div>
+    <div className="w-full flex flex-col sm:flex-row min-h-screen">
+      {/* Sidebar para desktop */}
+      <div className="hidden sm:block w-1/4 h-screen p-4 bg-[#1A243F] shadow-lg">
+        <Image
+          className="pb-10"
+          src="/img/logoOrange.svg"
+          alt="logo"
+          width={180}
+          height={38}
+          priority
+        />
+        <div className="space-y-2 text-white">
+          {renderMenuItem("Explorar", FaWpexplorer, "explorar")}
+          {renderMenuItem("Categoria", TbCategoryFilled, "categoria")}
+          {renderMenuItem("Adicionar Material", FaPlusCircle, "adicionar")}
+          {renderMenuItem("Meus Alugueis", HiRectangleStack, "alugueis")}
+          {renderMenuItem("Conta Unihuur", MdAccountBalance, "conta")}
         </div>
+      </div>
 
-        <div className="w-full h-screen p-4 bg-white overflow-y-auto relative">
-          {/* PERFIL */}
-          <div className="w-full flex items-center gap-2 justify-end mb-2 relative">
+      {/* Conteúdo principal */}
+      <div className="flex flex-col flex-1 bg-white relative min-h-screen">
+        {/* Header */}
+        {/* Header para Desktop */}
+        <div className="hidden sm:flex w-full items-center justify-end p-4 bg-white z-10 top-0 shadow-lg relative">
+          {/* Ícone do perfil */}
+          <div className="relative">
             <div
               className="flex items-center gap-2 cursor-pointer"
               onClick={() => setShowProfileOptions((prev) => !prev)}
@@ -106,8 +143,9 @@ export default function Dashboard() {
               <FaArrowDown className="text-black" />
             </div>
 
+            {/* Dropdown */}
             {showProfileOptions && (
-              <div className="absolute top-12 right-0 bg-white border shadow-lg rounded-lg py-2 w-40 z-50">
+              <div className="absolute right-[1rem] mt-5 bg-white border shadow-lg rounded-lg py-2 w-40 z-50">
                 <div
                   onClick={() => alert("Editar perfil")}
                   className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
@@ -123,16 +161,54 @@ export default function Dashboard() {
               </div>
             )}
           </div>
+        </div>
+        {/* Header para Mobile */}
+        <div className="flex sm:hidden w-full items-center justify-between p-4 bg-white fixed z-10 top-0 shadow-lg">
+          <Image
+            src="/img/logoOrange.svg"
+            alt="logo"
+            width={120}
+            height={38}
+            priority
+          />
+          <button onClick={() => setShowProfileOptions((prev) => !prev)}>
+            <MdAccountCircle className="text-orange-500 text-3xl" />
+          </button>
 
-          <hr className="mb-4" />
+          {showProfileOptions && (
+            <div className="absolute top-16 right-4 bg-white border shadow-lg rounded-lg py-2 w-40 z-50">
+              <div
+                onClick={() => alert("Editar perfil")}
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                Editar Perfil
+              </div>
+              <div
+                onClick={handleLogout}
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                Terminar Sessão
+              </div>
+            </div>
+          )}
+        </div>
 
-          <div className="mt-2 w-full">
-            {activeSection === "explorar" && <Explorar />}
-            {activeSection === "categoria" && <Categoria />}
-            {activeSection === "adicionar" && <Adicionar />}
-            {activeSection === "alugueis" && <Alugueis />}
-            {activeSection === "conta" && <Conta />}
-          </div>
+        {/* Conteúdo */}
+        <div className="flex-1 overflow-y-auto p-4">
+          {activeSection === "explorar" && <Explorar />}
+          {activeSection === "categoria" && <Categoria />}
+          {activeSection === "adicionar" && <Adicionar />}
+          {activeSection === "alugueis" && <Alugueis />}
+          {activeSection === "conta" && <Conta />}
+        </div>
+
+        {/* Menu Mobile */}
+        <div className="flex sm:hidden fixed bottom-0 left-0 w-full h-16 bg-[#1A243F] justify-around items-center z-30">
+          {renderMenuItemMobile("Explorar", FaWpexplorer, "explorar")}
+          {renderMenuItemMobile("Categoria", TbCategoryFilled, "categoria")}
+          {renderMenuItemMobile("Adicionar", FaPlusCircle, "adicionar")}
+          {renderMenuItemMobile("Alugueis", HiRectangleStack, "alugueis")}
+          {renderMenuItemMobile("Conta", MdAccountBalance, "conta")}
         </div>
       </div>
     </div>
