@@ -108,9 +108,9 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="w-full flex flex-col sm:flex-row min-h-screen">
+    <div className="w-full flex flex-col sm:flex-row min-h-screen overflow-y-hidden">
       {/* Sidebar para desktop */}
-      <div className="hidden sm:block w-1/4 h-screen p-4 bg-[#1A243F] shadow-lg">
+      <div className="hidden sm:block fixed top-0 left-0 w-1/4 h-screen p-4 bg-[#1A243F] shadow-lg z-20">
         <Image
           className="pb-10"
           src="/img/logoOrange.svg"
@@ -129,10 +129,10 @@ export default function Dashboard() {
       </div>
 
       {/* Conteúdo principal */}
-      <div className="flex flex-col flex-1 bg-white relative min-h-screen">
+      <div className="flex flex-col w-full sm:ml-[25%] bg-white relative min-h-screen">
         {/* Header */}
         {/* Header para Desktop */}
-        <div className="hidden sm:flex w-full items-center justify-end p-4 bg-white z-10 top-0 shadow-lg relative">
+        <div className="hidden sm:flex w-full items-center justify-end p-4 bg-white z-10 top-0  right-0 shadow-lg fixed">
           {/* Ícone do perfil */}
           <div className="relative">
             <div
@@ -194,7 +194,7 @@ export default function Dashboard() {
         </div>
 
         {/* Conteúdo */}
-        <div className="flex-1 overflow-y-auto p-4">
+        <div className="flex-1 overflow-y-auto p-4 pt-20 pb-20">
           {activeSection === "explorar" && <Explorar />}
           {activeSection === "categoria" && <Categoria />}
           {activeSection === "adicionar" && <Adicionar />}
