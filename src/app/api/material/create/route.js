@@ -1,35 +1,27 @@
-// app/api/material/create/route.js
-import { NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
+import { PrismaClient } from "@prisma/client";
 
-export async function POST(request) {
-  const { nome, categoria, quantidade, preco } = await request.json();
+const prisma = new PrismaClient();
 
-  // Verificar se todos os campos obrigatórios estão presentes
-  if (!nome || !categoria || quantidade === undefined || preco === undefined) {
-    return NextResponse.json(
-      { message: 'Campos obrigatórios não preenchidos' },
-      { status: 400 }
-    );
-  }
-
+export async function POST(req) {
   try {
-    // Criar o material no banco
+    const { titulo, descricao, categoria, precoAluguel, userId } = await req.json();
+
     const material = await prisma.material.create({
       data: {
-        nome,
+        titulo,
+        descricao,
         categoria,
-        quantidade: Number(quantidade),  // Garantir que seja um número
-        preco: Number(preco),  // Garantir que seja um número
-        status: "disponível",  // Status padrão
+        precoAluguel,
+        status: "disponível", // Status padrão
+        userId,
       },
     });
 
-    return NextResponse.json(material, { status: 201 });
+    return new Response(JSON.stringify(material), { status: 201 });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      { message: `Erro ao adicionar material: ${error.message}` },
+    console.error("Erro ao criar material:", error);
+    return new Response(
+      JSON.stringify({ message: "Erro ao criar material" }),
       { status: 500 }
     );
   }

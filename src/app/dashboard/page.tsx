@@ -22,6 +22,7 @@ export default function Dashboard() {
   // Verifica o token após o componente ser montado
   useEffect(() => {
     const token = localStorage.getItem("token");
+console.log('Token recuperado:', token);
 
     if (token) {
       setIsAuthenticated(true); // Autenticado
@@ -106,6 +107,7 @@ export default function Dashboard() {
     setIsAuthenticated(false); // Atualiza o estado de autenticação
     router.push("/"); // Redireciona
   };
+  
 
   return (
     <div className="w-full flex flex-col sm:flex-row min-h-screen overflow-y-hidden">

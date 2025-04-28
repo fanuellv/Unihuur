@@ -10,7 +10,7 @@ type ModalLoginProps = {
 
 export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [senha, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
 
@@ -29,7 +29,7 @@ export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, senha }),
       });
 
       const data = await res.json();
@@ -40,7 +40,11 @@ export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
       }
 
       // Armazenar o token JWT no localStorage
+      console.log('Token recebido:', data.token);
       localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.token);
+console.log('Token armazenado no localStorage:', localStorage.getItem("token"));
+
 
       // Fechar o modal
       onClose();
@@ -95,7 +99,7 @@ export default function ModalLogin({ isOpen, onClose }: ModalLoginProps) {
           <input
             type="password"
             placeholder="Senha"
-            value={password}
+            value={senha}
             onChange={(e) => setPassword(e.target.value)}
             className="border text-black border-gray-200 rounded-xl p-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-400 transition"
           />
