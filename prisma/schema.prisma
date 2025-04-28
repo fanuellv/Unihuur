@@ -8,10 +8,70 @@ generator client {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
+  id          Int       @id @default(autoincrement())
+  nome        String
+  email       String    @unique
+  senha       String
+  tipoConta   String    @default("normal")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  materiais   Material[]
+  alugueis    Aluguel[]
+  avaliacoes  Avaliacao[]
 }
+
+model Material {
+  id           Int       @id @default(autoincrement())
+  titulo       String
+  descricao    String
+  categoria    String
+  precoAluguel Decimal    @default(0.00)
+  status       String     @default("disponível")
+  userId       Int
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  user         User       @relation(fields: [userId], references: [id])
+  alugueis     Aluguel[]
+  avaliacoes   Avaliacao[]
+}
+
+model Aluguel {
+  id           Int       @id @default(autoincrement())
+  userId       Int
+  materialId   Int
+  dataInicio   DateTime
+  dataFim      DateTime
+  precoTotal   Decimal
+  status       String     @default("pendente")
+  createdAt    DateTime   @default(now())
+
+  user         User       @relation(fields: [userId], references: [id])
+  material     Material   @relation(fields: [materialId], references: [id])
+  pagamento    Pagamento?
+}
+
+model Pagamento {
+  id            Int      @id @default(autoincrement())
+  aluguelId     Int      @unique
+  valor         Decimal
+  metodoPagamento String
+  status        String   @default("pendente")
+  dataPagamento DateTime
+
+  aluguel       Aluguel  @relation(fields: [aluguelId], references: [id])
+}
+
+model Avaliacao {
+  id           Int       @id @default(autoincrement())
+  userId       Int
+  materialId   Int
+  nota         Int
+  comentario   String
+  createdAt    DateTime   @default(now())
+
+  user         User       @relation(fields: [userId], references: [id])
+  material     Material   @relation(fields: [materialId], references: [id])
+}
+
 
