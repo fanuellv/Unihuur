@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
 import jwt from "jsonwebtoken"; // Importando a lib jwt
+import Image from "next/image";
 
 interface MaterialFormData {
   titulo: string;
@@ -292,10 +293,13 @@ export default function Adicionar() {
               <tr key={material.id} className="border-t text-black">
                 <td className="px-4 py-2">
                   {material.imagemUrl ? (
-                    <img
+                    <Image
                       src={material.imagemUrl}
                       alt={material.titulo}
                       className="w-16 h-16 object-cover rounded-md"
+                      width={50}
+                      height={50}
+                      priority
                     />
                   ) : (
                     <div className="w-16 h-16 bg-gray-200 rounded-md flex items-center justify-center text-gray-400 text-sm">
