@@ -20,6 +20,7 @@ CREATE TABLE `Material` (
     `categoria` VARCHAR(191) NOT NULL,
     `precoAluguel` DECIMAL(65, 30) NOT NULL DEFAULT 0.00,
     `status` VARCHAR(191) NOT NULL DEFAULT 'disponível',
+    `imagemUrl` VARCHAR(191) NOT NULL,
     `userId` INTEGER NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,

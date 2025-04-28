@@ -13,6 +13,7 @@ export async function GET(request) {
         { status: 401 }
       );
     }
+    
 
     // Decodificar o token para pegar o userId
     const decoded = jwt.verify(token, process.env.JWT_SECRET);  // Não usamos tipos aqui, pois estamos no JavaScript

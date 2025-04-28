@@ -21,20 +21,22 @@ model User {
 }
 
 model Material {
-  id           Int       @id @default(autoincrement())
-  titulo       String
-  descricao    String
-  categoria    String
-  precoAluguel Decimal    @default(0.00)
-  status       String     @default("disponível")
-  userId       Int
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  id           Int       @id @default(autoincrement()) // ID único para o material
+  titulo       String    // Título do material
+  descricao    String    // Descrição do material
+  categoria    String    // Categoria do material
+  precoAluguel Decimal   @default(0.00) // Preço de aluguel do material
+  status       String    @default("disponível") // Status do material (ex: disponível, alugado)
+  imagemUrl    String    // URL da imagem do material
+  userId       Int       // Relacionamento com o usuário (quem criou o material)
+  createdAt    DateTime  @default(now()) // Data de criação
+  updatedAt    DateTime  @updatedAt // Data de atualização
 
-  user         User       @relation(fields: [userId], references: [id])
-  alugueis     Aluguel[]
-  avaliacoes   Avaliacao[]
+  user         User      @relation(fields: [userId], references: [id]) // Relacionamento com o usuário
+  alugueis     Aluguel[] // Relacionamento com alugueis
+  avaliacoes   Avaliacao[] // Relacionamento com avaliações
 }
+
 
 model Aluguel {
   id           Int       @id @default(autoincrement())
